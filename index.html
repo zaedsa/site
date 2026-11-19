@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Название — барбершоп</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Manrope:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#1d1f21;--s1:#272a2d;--s2:#303438;--line:#41464b;--text:#e8e9ea;--mute:#a0a5aa;--acc:#e3b341;--accd:#edc566;--ok:#8fc7a4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);color-scheme:dark}
+html{scroll-padding-top:84px;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 Manrope,system-ui,sans-serif;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+h1,h2,h3{font-family:Oswald,"Arial Narrow",sans-serif;font-weight:600;line-height:1.1;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:#1d1f21f2;border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#1d1f21;z-index:11}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.logo{font:600 24px Oswald,sans-serif;letter-spacing:.5px}
+nav{display:flex;gap:22px;margin-left:auto}
+nav a{color:var(--mute);text-decoration:none;font-weight:600;font-size:15px}
+nav a:hover{color:var(--text)}
+.btn{display:inline-block;border:0;border-radius:4px;background:var(--acc);color:#16181a;font:800 16px Manrope,sans-serif;padding:13px 24px;cursor:pointer;text-decoration:none;text-align:center}
+.btn:hover{background:#edc566}
+.btn.ghost{background:transparent;color:var(--text);border:1.5px solid var(--accd)}
+.btn.ghost:hover{background:var(--s2)}
+.btn.sm{padding:9px 18px;font-size:15px}
+:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;padding:44px 0 24px}
+.hero h1{font-size:clamp(40px,6.4vw,70px)}
+.hero p{color:var(--mute);max-width:46ch;margin:16px 0 24px}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:26px;color:var(--mute);font-size:15px}
+.facts b{color:var(--acc)}
+.hero svg,.gallery svg{display:block;width:100%;height:auto}
+.hero svg{border-radius:6px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-bottom:12px}
+.gallery figure{margin:0;background:var(--s1);border-radius:6px;overflow:hidden}
+.gallery figcaption{padding:10px 14px;color:var(--mute);font-size:14px}
+section{padding:52px 0 8px}
+h2{font-size:clamp(30px,4vw,42px);margin-bottom:8px}
+.sub{color:var(--mute);margin:0 0 24px;max-width:60ch}
+.promo{background:var(--acc);color:#16181a;padding:14px 18px;border-radius:4px;margin-bottom:20px;font:600 22px Oswald,sans-serif}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.svc{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--s1);border:1px solid var(--line);border-radius:6px;padding:18px;color:var(--text);font:inherit;cursor:pointer}
+.svc{border-top:4px solid var(--acc)}.svc:hover{background:var(--s2)}
+.svc b{font-size:18px}.svc .p{font:600 26px Oswald,sans-serif;color:var(--acc)}.svc small{color:var(--mute)}
+.steps{background:var(--s1);border:1px solid var(--line);border-radius:6px;padding:8px 24px 26px}
+fieldset{border:0;border-bottom:1px solid var(--line);margin:0;padding:20px 0}
+fieldset:last-of-type{border-bottom:0}
+legend{font:600 22px Oswald,sans-serif;padding:0;margin-bottom:12px;float:left;width:100%}
+legend+*{clear:both}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
+input,select,textarea{width:100%;background:var(--bg);color:var(--text);border:1px solid #565c62;border-radius:4px;padding:12px;font:inherit}
+.slots{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.slot{background:var(--bg);color:var(--text);border:1px solid #565c62;border-radius:4px;padding:9px 14px;font:600 15px Manrope,sans-serif;cursor:pointer}
+.slot[aria-pressed=true]{background:var(--acc);color:#16181a;border-color:var(--acc)}
+.slot:disabled{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+.hint{color:var(--mute);font-size:14px;margin:8px 0 0}
+.sum{background:var(--bg);border:1px dashed #565c62;border-radius:4px;padding:12px 14px;margin:6px 0 16px;font-size:15px}
+.err{color:#ffa3ab;font-size:14px;min-height:20px;margin:0 0 8px}
+.done{display:none;background:var(--s1);border:2px solid var(--ok);border-radius:6px;padding:26px}
+.done h3{color:var(--ok);font-size:28px;margin-bottom:10px}
+.reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.rev{background:#e4e6e8;color:#1d1f21;padding:20px;border-radius:6px}
+.rev p{margin:8px 0 12px}.rev small{color:#565c62}
+.stars{color:var(--acc);letter-spacing:2px;font-size:18px}.stars i{color:#9a9fa4;font-style:normal}
+.avg{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.avg strong{font:600 48px Oswald,sans-serif}
+.contacts{display:grid;grid-template-columns:1fr 1fr;gap:24px;background:var(--s1);border:1px solid var(--line);border-radius:6px;padding:26px}
+.contacts p{margin:0 0 10px}.contacts a:not(.btn),dialog a{color:var(--acc);font-weight:800}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.tags span{border:1px solid var(--line);border-radius:20px;padding:4px 12px;font-size:14px;color:var(--mute)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+footer{padding:36px 0 16px;color:var(--mute);text-align:center;font-size:14px}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#1d1f21f5;border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;justify-content:center}
+.bar .btn{flex:1;max-width:260px}
+dialog{background:var(--s1);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:28px;max-width:420px;width:calc(100% - 32px)}
+dialog::backdrop{background:#000b}
+dialog h3{font-size:26px;margin-bottom:14px}dialog p{margin:0 0 10px}
+@media(max-width:760px){.hero,.gallery,.row,.contacts{grid-template-columns:1fr}nav{display:none}header .btn{margin-left:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><span class="logo">Название</span>
+<nav><a href="#services">Услуги</a><a href="#book">Запись</a><a href="#reviews">Отзывы</a><a href="#contacts">Контакты</a></nav>
+<a class="btn sm" href="#book">Записаться</a></div></header>
+
+<main class="wrap">
+<div class="hero">
+ <div>
+  <h1>Хорошая стрижка без пафоса и записи за неделю</h1>
+  <p>Барбершоп в вашем районе. Без лишних церемоний: приходите, выбирайте форму и уходите с аккуратной стрижкой.</p>
+  <a class="btn" href="#book">Выбрать время</a>
+  <div class="facts"><span><b>4,8</b> · 217 оценок</span><span>[Адрес]</span><span>ежедневно 10:00–21:00</span></div>
+ </div>
+ <svg viewBox="0 0 400 320" role="img" aria-label="Парикмахерское кресло у зеркала в серых тонах">
+  <rect width="400" height="320" fill="#303438"/><rect x="0" y="262" width="400" height="58" fill="#1d1f21"/>
+  <rect x="44" y="26" width="150" height="190" rx="75" fill="#41464b" stroke="#d3d6d9" stroke-width="7"/>
+  <rect x="60" y="42" width="118" height="158" rx="59" fill="#565c62" opacity=".6"/>
+  <rect x="232" y="150" width="110" height="70" rx="16" fill="#e3b341"/>
+  <rect x="216" y="116" width="30" height="112" rx="14" fill="#b98f20"/>
+  <rect x="274" y="220" width="24" height="42" fill="#868b90"/><rect x="238" y="258" width="94" height="12" rx="6" fill="#d3d6d9"/>
+ </svg>
+</div>
+<div class="gallery">
+ <figure><svg viewBox="0 0 300 220" role="img" aria-label="Ножницы и расчёска"><rect width="300" height="220" fill="#e1e3e5"/>
+  <circle cx="110" cy="150" r="22" fill="none" stroke="#41464b" stroke-width="9"/><circle cx="170" cy="160" r="22" fill="none" stroke="#41464b" stroke-width="9"/>
+  <path d="M122 132 L220 40 M160 142 L232 52" stroke="#1d1f21" stroke-width="8" stroke-linecap="round"/>
+  <rect x="40" y="188" width="150" height="14" rx="3" fill="#868b90"/>
+  <g stroke="#868b90" stroke-width="3"><path d="M50 188v-12M62 188v-12M74 188v-12M86 188v-12M98 188v-12M110 188v-12M122 188v-12M134 188v-12M146 188v-12M158 188v-12M170 188v-12M182 188v-12"/></g></svg>
+  <figcaption>Рабочее место мастера</figcaption></figure>
+ <figure><svg viewBox="0 0 300 220" role="img" aria-label="Зеркало и полка"><rect width="300" height="220" fill="#41464b"/>
+  <rect x="70" y="24" width="160" height="130" rx="6" fill="#868b90" stroke="#d3d6d9" stroke-width="6"/><path d="M90 140 L150 40 L170 40 L110 140Z" fill="#e1e3e5" opacity=".35"/>
+  <rect x="50" y="170" width="200" height="12" fill="#1d1f21"/><rect x="70" y="146" width="16" height="24" fill="#d3d6d9"/><rect x="96" y="138" width="14" height="32" fill="#a0a5aa"/><rect x="190" y="150" width="30" height="20" fill="#d3d6d9"/></svg>
+  <figcaption>Зона стрижки</figcaption></figure>
+ <figure><svg viewBox="0 0 300 220" role="img" aria-label="Опасная бритва и помазок"><rect width="300" height="220" fill="#272a2d"/>
+  <path d="M50 150 L190 100 L196 116 L56 168Z" fill="#d3d6d9"/><rect x="180" y="96" width="80" height="26" rx="10" transform="rotate(-18 180 96)" fill="#565c62"/>
+  <rect x="200" y="140" width="22" height="50" rx="6" fill="#868b90"/><ellipse cx="211" cy="132" rx="26" ry="20" fill="#e1e3e5"/></svg>
+  <figcaption>Уход за бородой</figcaption></figure>
+</div>
+
+<section id="services"><h2>Услуги и цены</h2>
+ <p class="sub">Нажмите на услугу, и она сразу подставится в форму записи.</p>
+ <div class="promo">Мужская стрижка от 600 ₽</div>
+ <div class="services" id="svcList"></div>
+</section>
+
+<section id="book"><h2>Запись онлайн</h2><p class="sub">Три шага: услуга, время, контакты. Мастер подтвердит запись в течение 15 минут.</p>
+ <form id="bookForm" class="steps" novalidate>
+  <fieldset><legend>1. Услуга</legend>
+   <select id="svc" aria-label="Услуга"></select></fieldset>
+  <fieldset><legend>2. Дата и время</legend>
+   <div class="row"><div><label for="date">Дата</label><input type="date" id="date" required></div>
+   <div><span class="hint" style="display:block;margin-top:30px">Зачёркнутое время занято.</span></div></div>
+   <div class="slots" id="slots" role="group" aria-label="Время записи"></div></fieldset>
+  <fieldset><legend>3. Контакты для ответа</legend>
+   <div class="row"><div><label for="name">Имя</label><input id="name" autocomplete="name" placeholder="Например, Алексей" required></div>
+   <div><label for="phone">Телефон или Telegram</label><input id="phone" autocomplete="tel" placeholder="+7 900 000-00-00 или @ник" required></div></div>
+   <div style="margin-top:14px"><label for="note">Пожелания (необязательно)</label><textarea id="note" rows="2" placeholder="Например, low fade и аккуратная борода"></textarea></div></fieldset>
+  <div class="sum" id="sum" aria-live="polite"></div>
+  <p class="err" id="err" role="alert"></p>
+  <button class="btn" type="submit">Записаться</button>
+ </form>
+ <div class="done" id="done" tabindex="-1"><h3>Запись отправлена</h3><p id="doneText"></p><button class="btn ghost" id="again" type="button">Записать ещё одного гостя</button></div>
+</section>
+
+<section id="reviews"><h2>Отзывы</h2>
+ <div class="avg"><strong>4,8</strong><div><div class="stars" aria-label="Оценка 4,8 из 5">★★★★★</div><small style="color:var(--mute)">217 оценок на Яндекс Картах</small></div></div>
+ <div class="reviews" id="revList"></div></section>
+
+<section id="contacts"><h2>Как нас найти</h2>
+ <div class="contacts">
+  <div><p><b>Адрес:</b> [Адрес]</p>
+  <p><b>Часы работы:</b> ежедневно с 10:00 до 21:00</p>
+  <p><b>Телефон:</b> <a href="tel:+70000000000">[Телефон]</a></p>
+  </div>
+  <div><p><b>Удобства</b></p><div class="tags"><span>Барбершоп</span><span>Парикмахерская</span><span>Салон красоты</span><span>[Район/метро]</span></div>
+  <div class="cta"><a class="btn sm" href="tel:+70000000000">Позвонить</a><a class="btn sm ghost" href="https://yandex.ru/maps/" target="_blank" rel="noopener">Показать на карте</a></div></div>
+ </div></section>
+</main>
+<footer><div class="wrap">© 2026 [Название]. Демонстрационная страница.</div></footer>
+
+<div class="bar"><a class="btn" href="#book">Записаться</a><button class="btn ghost" id="openContacts" type="button">Контакты</button></div>
+<dialog id="contacts-dlg">
+ <h3>Контакты</h3>
+ <p><b>Адрес:</b> [Адрес]</p>
+ <p><b>Телефон:</b> <a href="tel:+70000000000">[Телефон]</a></p>
+ 
+ <p><b>Часы работы:</b> ежедневно с 10:00 до 21:00</p>
+ <button class="btn" id="closeContacts" type="button">Закрыть</button>
+</dialog>
+
+<script>
+(function(){
+var services=[["Мужская стрижка","600 ₽","Классика, fade, машинка"],["Стрижка бороды","500 ₽","Форма и контур"],["Стрижка + борода","1 000 ₽","Всё за один визит"],["Детская стрижка","500 ₽","Для ребят до 12 лет"]];
+var reviews=[
+ {n:"Александр С.",r:5,t:"Записаться получается день в день. Мастер всё делает тщательно и быстро, подсказывает, что подойдёт, а что нет."},
+ {n:"Артур К.",r:5,t:"Стригусь здесь уже четыре года, рядом с домом. Мастера приятные, цены приемлемые, вопросов к стрижке не бывает."},
+ {n:"Роман Б.",r:4,t:"Нормальное место, но с переходом на висках хотелось бы большей тщательности. Лучше заранее выбрать мастера."}
+];
+var svcEl=document.getElementById('svc'),svcList=document.getElementById('svcList');
+services.forEach(function(s,i){
+ var o=document.createElement('option');o.value=i;o.textContent=s[0]+' — '+s[1];svcEl.appendChild(o);
+ var b=document.createElement('button');b.type='button';b.className='svc';
+ b.innerHTML='<b>'+s[0]+'</b><small>'+s[2]+'</small><span class="p">'+s[1]+'</span>';
+ b.onclick=function(){svcEl.value=i;upd();document.getElementById('book').scrollIntoView();};
+ svcList.appendChild(b);
+});
+var list=document.getElementById('revList');
+reviews.forEach(function(v){
+ var s='';for(var i=1;i<=5;i++)s+=i<=v.r?'★':'<i>★</i>';
+ var d=document.createElement('div');d.className='rev';
+ d.innerHTML='<div class="stars" aria-label="Оценка '+v.r+' из 5">'+s+'</div><p>'+v.t+'</p><small>'+v.n+'</small>';
+ list.appendChild(d);
+});
+
+var dateEl=document.getElementById('date'),slotsEl=document.getElementById('slots'),sum=document.getElementById('sum'),chosen=null;
+function iso(d){var m=d.getMonth()+1,dd=d.getDate();return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(dd<10?'0':'')+dd}
+function fmt(v){var p=v.split('-');return p[2]+'.'+p[1]+'.'+p[0]}
+var today=new Date();dateEl.min=iso(today);dateEl.value=iso(today);
+function upd(){var s=services[svcEl.value];sum.textContent='Ваша запись: '+s[0]+', '+s[1]+', '+(dateEl.value?fmt(dateEl.value):'дата не выбрана')+', '+(chosen||'время не выбрано')+'.'}
+function renderSlots(){
+ slotsEl.innerHTML='';chosen=null;
+ var d=new Date(dateEl.value+'T00:00:00'),isToday=dateEl.value===iso(today);
+ for(var h=10;h<=20;h++){
+  var b=document.createElement('button');b.type='button';b.className='slot';b.setAttribute('aria-pressed','false');
+  var t=(h<10?'0':'')+h+':00';b.textContent=t;
+  if(((d.getDate()+h)%4===0)||(isToday&&h<=today.getHours()))b.disabled=true;
+  b.onclick=function(t,b){return function(){chosen=t;[].forEach.call(slotsEl.children,function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');upd();}}(t,b);
+  slotsEl.appendChild(b);
+ }
+ upd();
+}
+dateEl.addEventListener('change',renderSlots);svcEl.addEventListener('change',upd);renderSlots();
+
+var form=document.getElementById('bookForm'),err=document.getElementById('err'),done=document.getElementById('done');
+form.addEventListener('submit',function(e){
+ e.preventDefault();
+ var name=document.getElementById('name').value.trim(),contact=document.getElementById('phone').value.trim();
+ if(!dateEl.value||dateEl.value<iso(today)){err.textContent='Шаг 2: выберите дату не раньше сегодняшней.';return}
+ if(!chosen){err.textContent='Шаг 2: выберите свободное время.';return}
+ if(name.length<2){err.textContent='Шаг 3: введите ваше имя.';return}
+ if(!/^(\+?[\d\s\-()]{7,}|@[\w]{4,})$/.test(contact)){err.textContent='Шаг 3: укажите телефон (от 7 цифр) или Telegram вида @ник.';return}
+ err.textContent='';
+ var s=services[svcEl.value];
+ document.getElementById('doneText').textContent=name+', мы записали вас: '+s[0]+', '+fmt(dateEl.value)+' в '+chosen+'. Мастер ответит по контакту «'+contact+'» в течение 15 минут и подтвердит визит.';
+ form.style.display='none';done.style.display='block';done.focus();
+});
+document.getElementById('again').onclick=function(){
+ form.reset();dateEl.value=iso(today);renderSlots();done.style.display='none';form.style.display='block';
+};
+var dlg=document.getElementById('contacts-dlg');
+document.getElementById('openContacts').onclick=function(){dlg.showModal()};
+document.getElementById('closeContacts').onclick=function(){dlg.close()};
+dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+})();
+</script>
+</body>
+</html>
